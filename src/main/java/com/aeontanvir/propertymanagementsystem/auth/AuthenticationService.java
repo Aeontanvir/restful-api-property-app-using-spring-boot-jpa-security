@@ -1,10 +1,10 @@
 package com.aeontanvir.propertymanagementsystem.auth;
 
 
-import com.aeontanvir.projectcosting.config.JwtService;
-import com.aeontanvir.projectcosting.domains.Role;
-import com.aeontanvir.projectcosting.domains.User;
-import com.aeontanvir.projectcosting.repositories.UserRepository;
+import com.aeontanvir.propertymanagementsystem.config.JwtService;
+import com.aeontanvir.propertymanagementsystem.domains.Role;
+import com.aeontanvir.propertymanagementsystem.domains.User;
+import com.aeontanvir.propertymanagementsystem.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

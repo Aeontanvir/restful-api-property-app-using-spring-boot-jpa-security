@@ -1,6 +1,6 @@
 package com.aeontanvir.propertymanagementsystem.config;
 
-import com.aeontanvir.projectcosting.repositories.UserRepository;
+import com.aeontanvir.propertymanagementsystem.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
