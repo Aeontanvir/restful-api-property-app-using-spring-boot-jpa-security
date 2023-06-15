@@ -39,16 +39,44 @@ public class PropertyServiceImpl implements PropertyService {
 
     @Override
     public PropertyDto replace(Long id, PropertyDto propertyDto) {
-        return null;
+        Property existingProperty = propertyRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Property not found with id: " + id));
+        Property updatedProperty = propertyRepository.save(existingProperty);
+        return modelMapperHelper.convertToDto(updatedProperty, PropertyDto.class);
     }
 
     @Override
     public PropertyDto update(Long id, PropertyDto propertyDto) {
-        return null;
+        Property existingProperty = propertyRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Property not found with id: " + id));;
+        if (propertyDto.getName() != null) {
+            existingProperty.setName(propertyDto.getName());
+        }
+        if (propertyDto.getName() != null) {
+            existingProperty.setName(propertyDto.getName());
+        }
+        if (propertyDto.getDescription() != null) {
+            existingProperty.setDescription(propertyDto.getDescription());
+        }
+        if (propertyDto.getAddress() != null) {
+            existingProperty.setAddress(propertyDto.getAddress());
+        }
+        if (propertyDto.getSize() > 0) {
+            existingProperty.setSize(propertyDto.getSize());
+        }
+        if (propertyDto.getPrice() > 0) {
+            existingProperty.setPrice(propertyDto.getPrice());
+        }
+
+        Property updatedProperty = propertyRepository.save(existingProperty);
+        return modelMapperHelper.convertToDto(updatedProperty, PropertyDto.class);
     }
 
     @Override
     public void removeById(Long id) {
+        Property existingProperty = propertyRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Property not found with id: " + id));
 
+        propertyRepository.delete(existingProperty);
     }
 }
