@@ -7,6 +7,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @Builder
 @NoArgsConstructor
@@ -20,6 +22,16 @@ public class Property {
     private String name;
     private String description;
     private String address;
-    private int size;
+    private String size;
+    private String room;
+    private String bath;
+    private String ketchen;
+    private String status;
     private double price;
+
+    @ManyToOne
+    @JoinColumn(name = "owner_id")
+    private User owner;
+    @OneToMany(mappedBy = "property")
+    private List<Message> message;
 }

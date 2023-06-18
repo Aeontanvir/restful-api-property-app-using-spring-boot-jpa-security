@@ -61,7 +61,7 @@ public class PropertyServiceImpl implements PropertyService {
         if (propertyDto.getAddress() != null) {
             existingProperty.setAddress(propertyDto.getAddress());
         }
-        if (propertyDto.getSize() > 0) {
+        if (propertyDto.getSize() != null) {
             existingProperty.setSize(propertyDto.getSize());
         }
         if (propertyDto.getPrice() > 0) {

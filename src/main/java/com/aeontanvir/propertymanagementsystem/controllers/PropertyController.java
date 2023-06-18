@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/projects")
+@RequestMapping("/api/v1/properties")
 @RequiredArgsConstructor
 public class PropertyController {
     private final PropertyService propertyService;

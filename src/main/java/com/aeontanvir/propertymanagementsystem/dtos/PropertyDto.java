@@ -14,6 +14,10 @@ public class PropertyDto {
     private String name;
     private String description;
     private String address;
-    private int size;
+    private String size;
+    private String room;
+    private String bath;
+    private String ketchen;
+    private String status;
     private double price;
 }

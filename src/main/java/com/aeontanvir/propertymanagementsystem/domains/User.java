@@ -27,6 +27,13 @@ public class User implements UserDetails {
     private String password;
     @Enumerated(EnumType.STRING)
     private Role role;
+    private Boolean active;
+
+    @OneToMany(mappedBy = "owner")
+    private List<Property> property;
+
+    @OneToMany(mappedBy = "user")
+    private List<Message> message;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
