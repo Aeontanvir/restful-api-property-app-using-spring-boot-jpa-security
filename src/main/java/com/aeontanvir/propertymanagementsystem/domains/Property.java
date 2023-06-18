@@ -34,4 +34,5 @@ public class Property {
     private User owner;
     @OneToMany(mappedBy = "property")
     private List<Message> message;
+
 }

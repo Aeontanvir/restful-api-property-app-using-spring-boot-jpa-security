@@ -48,10 +48,8 @@ public class PropertyServiceImpl implements PropertyService {
     @Override
     public PropertyDto update(Long id, PropertyDto propertyDto) {
         Property existingProperty = propertyRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Property not found with id: " + id));;
-        if (propertyDto.getName() != null) {
-            existingProperty.setName(propertyDto.getName());
-        }
+                .orElseThrow(() -> new ResourceNotFoundException("Property not found with id: " + id));
+
         if (propertyDto.getName() != null) {
             existingProperty.setName(propertyDto.getName());
         }
@@ -64,6 +62,18 @@ public class PropertyServiceImpl implements PropertyService {
         if (propertyDto.getSize() != null) {
             existingProperty.setSize(propertyDto.getSize());
         }
+        if (propertyDto.getRoom() != null) {
+            existingProperty.setRoom(propertyDto.getRoom());
+        }
+        if (propertyDto.getBath() != null) {
+            existingProperty.setBath(propertyDto.getBath());
+        }
+        if (propertyDto.getKetchen() != null) {
+            existingProperty.setKetchen(propertyDto.getKetchen());
+        }
+        if (propertyDto.getStatus() != null) {
+            existingProperty.setStatus(propertyDto.getStatus());
+        }
         if (propertyDto.getPrice() > 0) {
             existingProperty.setPrice(propertyDto.getPrice());
         }
@@ -71,6 +81,7 @@ public class PropertyServiceImpl implements PropertyService {
         Property updatedProperty = propertyRepository.save(existingProperty);
         return modelMapperHelper.convertToDto(updatedProperty, PropertyDto.class);
     }
+
 
     @Override
     public void removeById(Long id) {
