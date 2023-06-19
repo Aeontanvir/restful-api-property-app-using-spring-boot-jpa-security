@@ -9,16 +9,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
-@OpenAPIDefinition(
-		info = @Info(
-				title = "Property Management System Endpoints",
-				version = "1.0.0",
-				contact = @Contact(
-						name = "Md Tanvir Rahman Khan",
-						email = "aeontanvir@gmail.com"
-				)
-		)
-)
 public class PropertymanagementsystemApplication {
 
 	public static void main(String[] args) {

@@ -22,5 +22,5 @@ public class PropertyDto {
     private String ketchen;
     private String status;
     private double price;
-    private UserDto user;
+    private UserDto owner;
 }
