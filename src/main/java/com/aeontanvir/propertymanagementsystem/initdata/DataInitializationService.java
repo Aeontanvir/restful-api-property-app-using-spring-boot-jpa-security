@@ -25,13 +25,29 @@ public class DataInitializationService implements CommandLineRunner {
     }
 
     private void initializeData() {
-        User newUser = User.builder()
+        User admin = User.builder()
+                .name("Admin")
+                .email("admin@gmail.com")
+                .password(passwordEncoder.encode("admin"))
+                .role(Role.ADMIN)
+                .build();
+        userRepository.save(admin);
+
+        User newUser1 = User.builder()
                 .name("Tanvir")
                 .email("aeontanvir@gmail.com")
                 .password(passwordEncoder.encode("132132132"))
                 .role(Role.OWNER)
                 .build();
-        User user = userRepository.save(newUser);
+        User user1 = userRepository.save(newUser1);
+        User newUser2 = User.builder()
+                .name("Yadab")
+                .email("yadab@gmail.com")
+                .password(passwordEncoder.encode("132132132"))
+                .role(Role.OWNER)
+                .build();
+        User user2 = userRepository.save(newUser2);
+
 
         Property newProperty = Property.builder()
                 .name("Property 1")
@@ -43,7 +59,7 @@ public class DataInitializationService implements CommandLineRunner {
                 .ketchen("ketchen")
                 .status("available")
                 .price(5000)
-                .owner(user)
+                .owner(user1)
                 .build();
         Property newProperty2 = Property.builder()
                 .name("Property 2")
@@ -55,14 +71,40 @@ public class DataInitializationService implements CommandLineRunner {
                 .ketchen("ketchen")
                 .status("available")
                 .price(5000)
-                .owner(user)
+                .owner(user1)
+                .build();
+        Property newProperty3 = Property.builder()
+                .name("Property 3")
+                .description("description")
+                .address("address")
+                .size("size")
+                .room("room")
+                .bath("bath")
+                .ketchen("ketchen")
+                .status("available")
+                .price(5000)
+                .owner(user2)
+                .build();
+        Property newProperty4 = Property.builder()
+                .name("Property 4")
+                .description("description")
+                .address("address")
+                .size("size")
+                .room("room")
+                .bath("bath")
+                .ketchen("ketchen")
+                .status("available")
+                .price(5000)
+                .owner(user2)
                 .build();
         Property property1 = propertyRepository.save(newProperty);
         Property property2 = propertyRepository.save(newProperty2);
+        Property property3 = propertyRepository.save(newProperty3);
+        Property property4 = propertyRepository.save(newProperty4);
 
         Message message = Message.builder()
                 .property(property1)
-                .user(user)
+                .user(user1)
                 .message("Test Messasge")
                 .build();
         messageRepository.save(message);

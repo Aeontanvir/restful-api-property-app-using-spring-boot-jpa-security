@@ -17,5 +17,6 @@ public class UserDto {
     private String name;
     private String email;
     private Boolean active;
+    private Role role;
 
 }

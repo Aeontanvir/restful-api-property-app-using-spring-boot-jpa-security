@@ -1,12 +1,17 @@
 package com.aeontanvir.propertymanagementsystem.services.impl;
 
 import com.aeontanvir.propertymanagementsystem.domains.Property;
+import com.aeontanvir.propertymanagementsystem.domains.Role;
+import com.aeontanvir.propertymanagementsystem.domains.User;
 import com.aeontanvir.propertymanagementsystem.dtos.PropertyDto;
 import com.aeontanvir.propertymanagementsystem.exceptions.ResourceNotFoundException;
 import com.aeontanvir.propertymanagementsystem.helpers.ModelMapperHelper;
 import com.aeontanvir.propertymanagementsystem.repositories.PropertyRepository;
 import com.aeontanvir.propertymanagementsystem.services.PropertyService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,7 +24,15 @@ public class PropertyServiceImpl implements PropertyService {
     private final ModelMapperHelper modelMapperHelper;
     @Override
     public List<PropertyDto> getAll() {
-        List<Property> properties = propertyRepository.findAll();
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User authUser = (User) authentication.getPrincipal();
+        List<Property> properties;
+        if(!authUser.getRole().equals(Role.OWNER)){
+            properties = propertyRepository.findAll();
+        }else{
+            properties = propertyRepository.findByOwnerId(authUser.getId());
+        }
+
         return modelMapperHelper.convertToDtoList(properties, PropertyDto.class);
     }
 
@@ -33,6 +46,8 @@ public class PropertyServiceImpl implements PropertyService {
     @Override
     public PropertyDto create(PropertyDto propertyDto) {
         Property property = modelMapperHelper.convertToEntity(propertyDto, Property.class);
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        UserDetails userDetails = (User) authentication.getPrincipal();
         Property savedProperty = propertyRepository.save(property);
         return modelMapperHelper.convertToDto(savedProperty, PropertyDto.class);
     }

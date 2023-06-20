@@ -33,8 +33,10 @@ public class AuthenticationService {
         return AuthenticationResponse
                 .builder()
                 .token(jwtToken)
+                .name(user.getName())
                 .email(user.getEmail())
                 .userId(user.getId())
+                .role(user.getRole().toString())
                 .build();
     }
 
@@ -47,6 +49,7 @@ public class AuthenticationService {
         return AuthenticationResponse
                 .builder()
                 .token(jwtToken)
+                .name(user.getName())
                 .email(user.getEmail())
                 .userId(user.getId())
                 .role(user.getRole().toString())
