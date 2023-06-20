@@ -4,6 +4,7 @@ import com.aeontanvir.propertymanagementsystem.domains.Property;
 import com.aeontanvir.propertymanagementsystem.domains.Role;
 import com.aeontanvir.propertymanagementsystem.domains.User;
 import com.aeontanvir.propertymanagementsystem.dtos.PropertyDto;
+import com.aeontanvir.propertymanagementsystem.exceptions.ApiRequestException;
 import com.aeontanvir.propertymanagementsystem.exceptions.ResourceNotFoundException;
 import com.aeontanvir.propertymanagementsystem.helpers.ModelMapperHelper;
 import com.aeontanvir.propertymanagementsystem.repositories.PropertyRepository;
@@ -11,7 +12,6 @@ import com.aeontanvir.propertymanagementsystem.services.PropertyService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -32,7 +32,6 @@ public class PropertyServiceImpl implements PropertyService {
         }else{
             properties = propertyRepository.findByOwnerId(authUser.getId());
         }
-
         return modelMapperHelper.convertToDtoList(properties, PropertyDto.class);
     }
 
@@ -47,9 +46,15 @@ public class PropertyServiceImpl implements PropertyService {
     public PropertyDto create(PropertyDto propertyDto) {
         Property property = modelMapperHelper.convertToEntity(propertyDto, Property.class);
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        UserDetails userDetails = (User) authentication.getPrincipal();
-        Property savedProperty = propertyRepository.save(property);
-        return modelMapperHelper.convertToDto(savedProperty, PropertyDto.class);
+        User authUser = (User) authentication.getPrincipal();
+        if(authUser.getRole().equals(Role.OWNER)){
+            property.setOwner(authUser);
+            Property savedProperty = propertyRepository.save(property);
+            return modelMapperHelper.convertToDto(savedProperty, PropertyDto.class);
+        }else {
+            throw new ApiRequestException("Only property owner can add property");
+        }
+
     }
 
     @Override
@@ -83,8 +88,8 @@ public class PropertyServiceImpl implements PropertyService {
         if (propertyDto.getBath() != null) {
             existingProperty.setBath(propertyDto.getBath());
         }
-        if (propertyDto.getKetchen() != null) {
-            existingProperty.setKetchen(propertyDto.getKetchen());
+        if (propertyDto.getKitchen() != null) {
+            existingProperty.setKitchen(propertyDto.getKitchen());
         }
         if (propertyDto.getStatus() != null) {
             existingProperty.setStatus(propertyDto.getStatus());

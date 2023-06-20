@@ -19,7 +19,7 @@ public class PropertyDto {
     private String size;
     private String room;
     private String bath;
-    private String ketchen;
+    private String kitchen;
     private String status;
     private double price;
     private UserDto owner;

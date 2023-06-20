@@ -25,7 +25,7 @@ public class Property {
     private String size;
     private String room;
     private String bath;
-    private String ketchen;
+    private String kitchen;
     private String status;
     private double price;
 
