@@ -45,12 +45,18 @@ public class DataInitializationService implements CommandLineRunner {
                 .build();
         User user2 = userRepository.save(newUser2);
 
-        Address address = Address.builder()
-                .street("Test").zip("43545").city("Fairfield").state("Iowa").build();
+        Address address1 = Address.builder()
+                .street("Test1").zip("43545").city("Fairfield").state("Iowa").build();
+        Address address2 = Address.builder()
+                .street("Test2").zip("43545").city("Fairfield").state("Iowa").build();
+        Address address3 = Address.builder()
+                .street("Test3").zip("43545").city("Fairfield").state("Iowa").build();
+        Address address4 = Address.builder()
+                .street("Test4").zip("43545").city("Fairfield").state("Iowa").build();
         Property newProperty = Property.builder()
                 .name("Property 1")
                 .description("description")
-                .address(address)
+                .address(address1)
                 .size("size")
                 .room("room")
                 .bath("bath")
@@ -62,7 +68,7 @@ public class DataInitializationService implements CommandLineRunner {
         Property newProperty2 = Property.builder()
                 .name("Property 2")
                 .description("description")
-                .address(address)
+                .address(address2)
                 .size("size")
                 .room("room")
                 .bath("bath")
@@ -74,7 +80,7 @@ public class DataInitializationService implements CommandLineRunner {
         Property newProperty3 = Property.builder()
                 .name("Property 3")
                 .description("description")
-                .address(address)
+                .address(address3)
                 .size("size")
                 .room("room")
                 .bath("bath")
@@ -86,7 +92,7 @@ public class DataInitializationService implements CommandLineRunner {
         Property newProperty4 = Property.builder()
                 .name("Property 4")
                 .description("description")
-                .address(address)
+                .address(address4)
                 .size("size")
                 .room("room")
                 .bath("bath")
@@ -95,6 +101,10 @@ public class DataInitializationService implements CommandLineRunner {
                 .price(5000)
                 .owner(user2)
                 .build();
+        address1.setProperty(newProperty);
+        address2.setProperty(newProperty2);
+        address3.setProperty(newProperty3);
+        address4.setProperty(newProperty4);
         Property property1 = propertyRepository.save(newProperty);
         Property property2 = propertyRepository.save(newProperty2);
         Property property3 = propertyRepository.save(newProperty3);

@@ -1,5 +1,6 @@
 package com.aeontanvir.propertymanagementsystem.services.impl;
 
+import com.aeontanvir.propertymanagementsystem.domains.Address;
 import com.aeontanvir.propertymanagementsystem.domains.Property;
 import com.aeontanvir.propertymanagementsystem.domains.Role;
 import com.aeontanvir.propertymanagementsystem.domains.User;
@@ -77,7 +78,7 @@ public class PropertyServiceImpl implements PropertyService {
             existingProperty.setDescription(propertyDto.getDescription());
         }
         if (propertyDto.getAddress() != null) {
-            existingProperty.setAddress(propertyDto.getAddress());
+            existingProperty.setAddress(modelMapperHelper.convertToEntity(propertyDto.getAddress(), Address.class));
         }
         if (propertyDto.getSize() != null) {
             existingProperty.setSize(propertyDto.getSize());
