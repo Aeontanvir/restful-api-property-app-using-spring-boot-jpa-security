@@ -1,9 +1,6 @@
 package com.aeontanvir.propertymanagementsystem.initdata;
 
-import com.aeontanvir.propertymanagementsystem.domains.Message;
-import com.aeontanvir.propertymanagementsystem.domains.Property;
-import com.aeontanvir.propertymanagementsystem.domains.Role;
-import com.aeontanvir.propertymanagementsystem.domains.User;
+import com.aeontanvir.propertymanagementsystem.domains.*;
 import com.aeontanvir.propertymanagementsystem.repositories.MessageRepository;
 import com.aeontanvir.propertymanagementsystem.repositories.PropertyRepository;
 import com.aeontanvir.propertymanagementsystem.repositories.UserRepository;
@@ -48,15 +45,16 @@ public class DataInitializationService implements CommandLineRunner {
                 .build();
         User user2 = userRepository.save(newUser2);
 
-
+        Address address = Address.builder()
+                .street("Test").zip("43545").city("Fairfield").state("Iowa").build();
         Property newProperty = Property.builder()
                 .name("Property 1")
                 .description("description")
-                .address("address")
+                .address(address)
                 .size("size")
                 .room("room")
                 .bath("bath")
-                .ketchen("ketchen")
+                .kitchen("ketchen")
                 .status("available")
                 .price(5000)
                 .owner(user1)
@@ -64,11 +62,11 @@ public class DataInitializationService implements CommandLineRunner {
         Property newProperty2 = Property.builder()
                 .name("Property 2")
                 .description("description")
-                .address("address")
+                .address(address)
                 .size("size")
                 .room("room")
                 .bath("bath")
-                .ketchen("ketchen")
+                .kitchen("ketchen")
                 .status("available")
                 .price(5000)
                 .owner(user1)
@@ -76,11 +74,11 @@ public class DataInitializationService implements CommandLineRunner {
         Property newProperty3 = Property.builder()
                 .name("Property 3")
                 .description("description")
-                .address("address")
+                .address(address)
                 .size("size")
                 .room("room")
                 .bath("bath")
-                .ketchen("ketchen")
+                .kitchen("ketchen")
                 .status("available")
                 .price(5000)
                 .owner(user2)
@@ -88,11 +86,11 @@ public class DataInitializationService implements CommandLineRunner {
         Property newProperty4 = Property.builder()
                 .name("Property 4")
                 .description("description")
-                .address("address")
+                .address(address)
                 .size("size")
                 .room("room")
                 .bath("bath")
-                .ketchen("ketchen")
+                .kitchen("ketchen")
                 .status("available")
                 .price(5000)
                 .owner(user2)

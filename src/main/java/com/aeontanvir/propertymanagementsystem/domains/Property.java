@@ -21,7 +21,9 @@ public class Property {
     private Long id;
     private String name;
     private String description;
-    private String address;
+
+    @OneToOne(mappedBy = "property", cascade = CascadeType.ALL)
+    private Address address;
     private String size;
     private String room;
     private String bath;

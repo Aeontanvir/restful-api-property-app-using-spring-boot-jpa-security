@@ -52,7 +52,7 @@ public class PropertyServiceImpl implements PropertyService {
             Property savedProperty = propertyRepository.save(property);
             return modelMapperHelper.convertToDto(savedProperty, PropertyDto.class);
         }else {
-            throw new ApiRequestException("Only property owner can add property");
+            throw new ApiRequestException("Only owner can add property");
         }
 
     }
